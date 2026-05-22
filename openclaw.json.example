@@ -1,0 +1,18 @@
+{
+  "model": {
+    "provider": "ollama",
+    "name": "llama3:8b",
+    "baseURL": "http://localhost:11434"
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true,
+        "package": "@openclaw/plugin-telegram",
+        "config": {
+          "botToken": "${env.TELEGRAM_BOT_TOKEN}"
+        }
+      }
+    }
+  }
+}

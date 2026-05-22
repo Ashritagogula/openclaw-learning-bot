@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # The OpenClaw personal AI gateway
+  openclaw:
+    build: .
+    container_name: openclaw-agent
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount the skills folder for live development/updates
+      - ./skills:/root/.openclaw/skills
+      # Mount a volume to persist state, memory, and runtime configs
+      - openclaw_data:/root/.openclaw
+    environment:
+      # Load credentials from .env file
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - ollama
+
+  # Local LLM service running Ollama
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama-service
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  openclaw_data:
+  ollama_data:
