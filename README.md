@@ -228,3 +228,4 @@ Instead of waiting for 9 PM, you can manually trigger the cron job to send you a
 docker exec -it openclaw-agent openclaw cron trigger "nightly-tech-brief"
 ```
 Verify that the received Telegram message matches the required Markdown format exactly.
+"Added improved docker and OpenClaw setup" 
