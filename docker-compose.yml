@@ -9,10 +9,12 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      # Mount the skills folder for live development/updates
-      - ./skills:/root/.openclaw/skills
       # Mount a volume to persist state, memory, and runtime configs
       - openclaw_data:/root/.openclaw
+      # Mount the skills folder for live development/updates
+      - ./skills:/root/.openclaw/skills
+      # Mount the config file directly so host edits reflect immediately
+      - ./openclaw.json:/root/.openclaw/openclaw.json
     environment:
       # Load credentials from .env file
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}

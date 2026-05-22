@@ -1,18 +1,34 @@
 {
-  "model": {
-    "provider": "ollama",
-    "name": "llama3:8b",
-    "baseURL": "http://localhost:11434"
-  },
-  "plugins": {
-    "entries": {
-      "telegram": {
-        "enabled": true,
-        "package": "@openclaw/plugin-telegram",
-        "config": {
-          "botToken": "${env.TELEGRAM_BOT_TOKEN}"
-        }
+  "models": {
+    "providers": {
+      "ollama": {
+        "baseUrl": "${env.OLLAMA_BASE_URL}",
+        "api": "ollama",
+        "models": [
+          {
+            "id": "llama3:8b",
+            "name": "Llama 3 (8B)"
+          }
+        ]
       }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": "ollama/llama3:8b"
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "botToken": "${env.TELEGRAM_BOT_TOKEN}"
+    }
+  },
+  "skills": {
+    "load": {
+      "extraDirs": [
+        "./skills"
+      ]
     }
   }
 }
